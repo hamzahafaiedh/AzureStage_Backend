@@ -46,10 +46,10 @@ namespace User.Management.API.Controllers
                 new Response { Status = "Error", Message = "User not found" });
         }*/
 
-        [HttpGet("{Email}")]
-        public async Task<IActionResult> GetUser(string Email)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUser(string userId)
         {
-            var user = await _userManager.FindByEmailAsync(Email);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)
             {
@@ -79,10 +79,10 @@ namespace User.Management.API.Controllers
             return Ok(allUsers);
         }
 
-        [HttpPut("{Email}")]
-        public async Task<IActionResult> UpdateUser(string Email, UpdateUserModel model)
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, UpdateUserModel model)
         {
-            var user = await _userManager.FindByEmailAsync(Email);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)
             {
@@ -123,10 +123,10 @@ namespace User.Management.API.Controllers
             }
         }
 
-        [HttpDelete("{Email}")]
-        public async Task<IActionResult> DeleteUser(string Email)
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
         {
-            var user = await _userManager.FindByEmailAsync(Email);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)
             {
