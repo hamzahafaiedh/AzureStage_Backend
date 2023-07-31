@@ -113,7 +113,7 @@ namespace User.Management.API.Controllers
                 }
             }
             return StatusCode(StatusCodes.Status500InternalServerError,
-                       new Response { Status = "Error", Message = "This User Doesnot exist!" });
+                       new Response { Status = "Error", Message = "This User Does not exist!" });
         }
 
         [HttpPost]
@@ -126,6 +126,12 @@ namespace User.Management.API.Controllers
                 if (user == null)
                 {
                     return BadRequest(new Response { Status = "Error", Message = "User not found. Please check the email and try again." });
+                }
+
+                // Check if the user's email is confirmed
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    return BadRequest(new Response { Status = "Error", Message = "Email not confirmed. Please check your email for the confirmation link." });
                 }
 
                 if (user.TwoFactorEnabled && await _userManager.CheckPasswordAsync(user, loginModel.Password))
