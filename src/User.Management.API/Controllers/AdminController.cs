@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using User.Management.API.Models;
+using User.Management.API.Models.Authentication;
 using User.Management.API.Models.Authentication.SignUp;
 using User.Management.API.Models.CRUD;
 
@@ -12,10 +13,10 @@ namespace User.Management.API.Controllers
     [ApiController]   
     public class AdminController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        public AdminController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -53,12 +54,12 @@ namespace User.Management.API.Controllers
 
             if (user != null)
             {
-                var Getuser = new GetUserModel
-                {
-                    UserName = user.UserName,
-                    Email = user.Email
-                };
-                return Ok(Getuser);
+                //var Getuser = new GetUserModel
+                //{
+                //    UserName = user.UserName,
+                //    Email = user.Email
+                //};
+                return Ok(user);
             }
             else
             {

@@ -4,6 +4,12 @@ namespace User.Management.API.Models.Authentication.SignUp
 {
     public class RegisterUser
     {
+        [Required(ErrorMessage = "FirstName is required")]
+        public string? FirstName { get; set; }
+
+        [Required(ErrorMessage = "LastName is required")]
+        public string? LastName { get; set; }
+
         [Required(ErrorMessage = "User Name is required")]
         public string? Username { get; set; }
 
